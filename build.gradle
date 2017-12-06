@@ -1,0 +1,26 @@
+group 'mongotest'
+version '1.0-SNAPSHOT'
+
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+//apply plugin: 'org.springframework.boot'
+
+jar {
+    baseName = 'mongotest'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter', version: '1.5.9.RELEASE'
+    compile group: 'org.springframework.data', name: 'spring-data-mongodb', version: '2.0.2.RELEASE'
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+}
