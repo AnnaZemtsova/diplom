@@ -28,10 +28,10 @@ public class AverageVehicleData implements GeneralVehicles{
     //________________________________________________________________________________________________________________________
 
     @Override
-    public ArrayList<Vehicle> getGeneralTrains() {
+    public ArrayList<Vehicle> getGeneralTrains() throws NoneVehicleToCity {
         ArrayList<Vehicle> trains = inputVehicle.getAllTrains();
         ArrayList<City> cities = inputUserData.getWantedCities();
-        return getVehiclesWithAverageDataForAllCities(trains,cities,AllData.TrainPlace);
+        return  searchAllVehiclesByComfortLevel(AllData.TrainPlace,trains,cities);
     }
 
 
@@ -39,19 +39,41 @@ public class AverageVehicleData implements GeneralVehicles{
     //________________________________________________________________________________________________________________________
 
     @Override
-    public ArrayList<Vehicle> getGeneralPlanes() {
-        ArrayList<Vehicle> trains = inputVehicle.getAllPlanes();
+    public ArrayList<Vehicle> getGeneralPlanes() throws NoneVehicleToCity {
+        ArrayList<Vehicle> planes = inputVehicle.getAllPlanes();
         ArrayList<City> cities = inputUserData.getWantedCities();
-        return getVehiclesWithAverageDataForAllCities(trains,cities,AllData.PlanePlace);
+        return  searchAllVehiclesByComfortLevel(AllData.PlanePlace,planes,cities);
     }
 
     //________________________________________________________________________________________________________________________
 
     @Override
-    public ArrayList<Vehicle> getGeneralBuses() {
-        ArrayList<Vehicle> trains = inputVehicle.getAllBuses();
+    public ArrayList<Vehicle> getGeneralBuses() throws NoneVehicleToCity {
+        ArrayList<Vehicle> buses = inputVehicle.getAllBuses();
         ArrayList<City> cities = inputUserData.getWantedCities();
-        return getVehiclesWithAverageDataForAllCities(trains,cities,AllData.BusPlace);
+        return  searchAllVehiclesByComfortLevel(AllData.BusPlace,buses,cities);
+    }
+
+    //________________________________________________________________________________________________________________________
+
+    /*
+        Ищем транпорт для каждого города.
+        Сначала ищем тот который хочет пользователь, если его нет - другой.
+     */
+    private ArrayList<Vehicle> searchAllVehiclesByComfortLevel(int comfortLevel,ArrayList<Vehicle> vehicles,
+                                                               ArrayList<City> cities) throws NoneVehicleToCity {
+        ArrayList<Vehicle> resultVehicles = getVehiclesWithAverageDataForAllCities(vehicles,cities,comfortLevel);
+        ArrayList<City> citiesWithoutVehicle = getCitiesWithoutVehicle(resultVehicles,cities);
+        if(citiesWithoutVehicle.size()!=0){
+            ArrayList<Vehicle> otherVehiclesToCity;
+            for (City aCitiesWithoutVehicle : citiesWithoutVehicle) {
+                otherVehiclesToCity = getOtherVehicleToCity(comfortLevel, aCitiesWithoutVehicle, cities);
+                if(otherVehiclesToCity.size()!=0){
+                    resultVehicles.addAll(otherVehiclesToCity);
+                }
+            }
+        }
+        return resultVehicles;
     }
 
     //________________________________________________________________________________________________________________________
@@ -195,7 +217,7 @@ public class AverageVehicleData implements GeneralVehicles{
     /*
           ищем все города в который не едет ни одна машина желаемого вида транспорта
      */
-    private ArrayList<City> getCitiesWithoutVehicle(City to,ArrayList<Vehicle> vehicles,ArrayList<City> cities){
+    private ArrayList<City> getCitiesWithoutVehicle(ArrayList<Vehicle> vehicles,ArrayList<City> cities){
         ArrayList<City> citiesWithoutVehicle = new ArrayList<>();
         for (City city : cities) {
             boolean isExist = false;
@@ -302,16 +324,7 @@ public class AverageVehicleData implements GeneralVehicles{
                     }
                     if(generalVehiclesWithOneDirection.size()!=0) {
                         generalTrains.add(getVehicleWithAverageData(cities.get(i), cities.get(j), generalVehiclesWithOneDirection));
-                    }/*else{
-                        ArrayList<Vehicle> generalVehiclesByOneDirection = getVehicleWithOtherType(comfortLevel,cities.get(i),
-                                cities.get(j));
-                        if(generalVehiclesByOneDirection.size()!=0){
-                            generalTrains.add(getVehicleWithAverageData(cities.get(i), cities.get(j), generalVehiclesByOneDirection));
-                        }else{
-                            System.out.println("LBXM");
-                            //ТУТ МОЖНО ВЕРНУТЬ КАКОЙ_ТО ЭРРОР!!!!!!! в одну точку добраться невозможно!!!!!
-                        }
-                    }*/
+                    }
                 }
             }
         }
