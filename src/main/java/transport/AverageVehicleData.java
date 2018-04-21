@@ -296,7 +296,8 @@ public class AverageVehicleData implements GeneralVehicles{
     //________________________________________________________________________________________________________________________
 
     /*
-
+            Это пока вообще не надо и нигде не используется. оставила на случай если решим искать не все возможные направления 
+            а только чтобы хоть откудато можно было доехать в каждый город
      */
     private ArrayList<Vehicle> getVehicleWithOtherType(int comfortLevel, City cityFrom,City cityTo){
         ArrayList<Vehicle> resultVehicles = new ArrayList<>();
