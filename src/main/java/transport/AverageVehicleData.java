@@ -394,7 +394,7 @@ public class AverageVehicleData implements GeneralVehicles{
       Тут анализируем весь транспорт что есть и оцениваем сколько в среднем обойдется дорога  из каждой точки в каждую,
       и добавляем новые Vehicle, которые будут нужны только для алгоритма
       Пытаемся найти транспорт так, чтобы хотя бы как-то в любой город можно было доехать.
-      Если невозможно надо бы вернуть какой-то еррор!!
+     
      */
     private ArrayList<Vehicle> getVehiclesWithAverageDataForAllCities(@NotNull ArrayList<Vehicle> allVehicles,
                                                                @NotNull ArrayList<City> cities,int comfortLevel) throws NoneVehicleToCity {
