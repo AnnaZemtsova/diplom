@@ -27,16 +27,12 @@ public class AverageVehicleData implements GeneralVehicles{
 
     //________________________________________________________________________________________________________________________
 
-   
     @Override
     public ArrayList<Vehicle> getGeneralTrains() throws NoneVehicleToCity {
         ArrayList<Vehicle> trains = inputVehicle.getAllTrains();
         ArrayList<City> cities = inputUserData.getWantedCities();
-        ArrayList<Vehicle> vehicles = searchAllVehiclesByComfortLevel(AllData.TrainPlace,trains,cities);
-        ArrayList<City> citiesWithoutVehicle = getCitiesWithoutVehicle(vehicles,inputUserData.getWantedCities());
-        if(citiesWithoutVehicle.size()!=0) throw new NoneVehicleToCity();
-        else
-        return  vehicles;
+       return searchAllVehiclesByComfortLevel(AllData.TrainPlace,trains,cities);
+        
     }
 
 
@@ -47,11 +43,8 @@ public class AverageVehicleData implements GeneralVehicles{
     public ArrayList<Vehicle> getGeneralPlanes() throws NoneVehicleToCity {
         ArrayList<Vehicle> planes = inputVehicle.getAllPlanes();
         ArrayList<City> cities = inputUserData.getWantedCities();
-        ArrayList<Vehicle>vehicles =  searchAllVehiclesByComfortLevel(AllData.PlanePlace,planes,cities);
-        ArrayList<City> citiesWithoutVehicle = getCitiesWithoutVehicle(vehicles,inputUserData.getWantedCities());
-        if(citiesWithoutVehicle.size()!=0) throw new NoneVehicleToCity();
-        else
-            return  vehicles;
+        return   searchAllVehiclesByComfortLevel(AllData.PlanePlace,planes,cities);
+        
     }
 
     //________________________________________________________________________________________________________________________
@@ -60,13 +53,10 @@ public class AverageVehicleData implements GeneralVehicles{
     public ArrayList<Vehicle> getGeneralBuses() throws NoneVehicleToCity {
         ArrayList<Vehicle> buses = inputVehicle.getAllBuses();
         ArrayList<City> cities = inputUserData.getWantedCities();
-        ArrayList<Vehicle>vehicles =   searchAllVehiclesByComfortLevel(AllData.BusPlace,buses,cities);
-        ArrayList<City> citiesWithoutVehicle = getCitiesWithoutVehicle(vehicles,inputUserData.getWantedCities());
-        if(citiesWithoutVehicle.size()!=0) throw new NoneVehicleToCity();
-        else
-            return  vehicles;
+        return    searchAllVehiclesByComfortLevel(AllData.BusPlace,buses,cities);
+       
     }
-    //________________________________________________________________________________________________________________________
+ //________________________________________________________________________________________________________________________
 
     /*
         Ищем транпорт для каждого города.
