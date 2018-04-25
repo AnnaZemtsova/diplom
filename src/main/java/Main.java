@@ -4,6 +4,7 @@ import algorithm.Graph;
 import algorithm.TravelingSalesmanProblem;
 import data.City;
 import data.Vehicle;
+import exception.NoneVehicleToCity;
 import generalData.AllData;
 import inputData.InputCities;
 import inputData.InputUserData;
@@ -31,16 +32,26 @@ public class Main {
         double money = inputUserData.getMoney();
         double time = (double)(inputUserData.getTime()).getTime();
         ArrayList<City> wantedCity = inputUserData.getWantedCities();
-        GraphCreator graphCreator = new Graph(AllData.trains);
         TravelingSalesmanProblem travelingSalesmanProblem = new BranchBoundaryMethod();
-        Algorithm algorithm = new CorrelationMoneyTime(travelingSalesmanProblem,graphCreator,wantedCity );
+
         GeneralVehicles vehicles1 = new AverageVehicleData(inputVehicle,inputCities,inputUserData);
-        ArrayList<Vehicle> genneralTrains = vehicles1.getGeneralTrains();
-        for(int i=0;i<genneralTrains.size();i++){
-            System.out.println(genneralTrains.get(i).getFrom().getName()+" "+
-                    genneralTrains.get(i).getTo().getName()+" "+genneralTrains.get(i).getPrice()+" "+genneralTrains.get(i).getTimeInWay());
+        ArrayList<Vehicle> generalTrains = null;
+        try {
+            generalTrains = vehicles1.getGeneralTrains();
+        } catch (NoneVehicleToCity noneVehicleToCity) {
+            noneVehicleToCity.printStackTrace();
         }
-        // algorithm.getWay(money, time);
+        AllData.generalTrains = generalTrains;
+
+        GraphCreator graphCreator = new Graph(AllData.generalTrains);
+        Algorithm algorithm = new CorrelationMoneyTime(travelingSalesmanProblem,graphCreator,wantedCity );
+         graphCreator = new Graph(AllData.generalTrains);
+         graphCreator.printGraph(graphCreator.createGraphByTime(inputUserData.getWantedCities()));
+       /* for(int i=0;i<generalTrains.size();i++){
+            System.out.println(generalTrains.get(i).getFrom().getName()+" "+
+                    generalTrains.get(i).getTo().getName()+" "+generalTrains.get(i).getPrice()+" "+generalTrains.get(i).getTimeInWay());
+        }*/
+         algorithm.getWay(money, time);
     }
 
 }

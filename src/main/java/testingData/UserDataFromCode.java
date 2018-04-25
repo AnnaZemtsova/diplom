@@ -66,6 +66,6 @@ public class UserDataFromCode implements InputUserData {
 
     @Override
     public int getPreferredTransport() {
-        return 2;
+        return 1;
     }
 }

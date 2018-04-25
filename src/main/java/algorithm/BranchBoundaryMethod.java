@@ -695,7 +695,7 @@ public class BranchBoundaryMethod implements TravelingSalesmanProblem{
         System.out.println("__________________________________________________");
     }
     //_____________________________________________________________________________________
-
+/*
     private void printGraph(double[][] graph){
         String str="";
         System.out.println("GRAPH");
@@ -712,7 +712,7 @@ public class BranchBoundaryMethod implements TravelingSalesmanProblem{
             System.out.println();
             System.out.println( "------------------------------------------------------------------" );
         }
-    }
+    }*/
     //_____________________________________________________________________________________
 
 
