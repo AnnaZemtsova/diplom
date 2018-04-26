@@ -20,9 +20,9 @@ public class UserDataFromCode implements InputUserData {
         wanted.add( cities.get( 0 ) );
         wanted.add( cities.get( 1 ) );
         wanted.add( cities.get( 2 ) );
-     //   wanted.add( cities.get( 3 ) );
-      //  wanted.add( cities.get( 4 ) );
-       // wanted.add( cities.get( 5 ) );
+        wanted.add( cities.get( 3 ) );
+        wanted.add( cities.get( 4 ) );
+        wanted.add( cities.get( 5 ) );
 
        /* wanted.add( cities.get( 6 ) );
        /* wanted.add( cities.get( 7 ) );
@@ -56,16 +56,27 @@ public class UserDataFromCode implements InputUserData {
 
     @Override
     public Date getDateFrom() {
-        return new Date(2018, 4, 11, 0, 15);
+        return new Date(2018, 4, 26);
     }
 
     @Override
     public Date getDateTo() {
-        return new Date(2018, 4, 21, 0, 15);
+        return new Date(2019, 2, 30);
     }
 
     @Override
     public int getPreferredTransport() {
         return 1;
+    }
+
+    @Override
+    public int displacementDatesType() {
+        return SAME_NUMBER_OF_DAYS;
+    }
+
+    @Override
+    public ArrayList<Date> displacementDates() {
+        ArrayList <Date> displacementDates = new ArrayList<>();
+        return displacementDates;
     }
 }
