@@ -1399,7 +1399,7 @@ public class VehiclesFromCode implements InputVehicle {
         trains.add(VehicleOL1_19);
         trains.add(VehicleOL2_19);*/
         //____________________________________________________________________________________________________________
-        /*cities.add( cityZh );
+      /* cities.add( cityZh );
         cities.add( cityCh );
         cities.add( cityKr );
         cities.add( cityM );
@@ -1510,6 +1510,8 @@ public class VehiclesFromCode implements InputVehicle {
         dateFrom5 = new Date( 2017, 10, 12, 12, 15 );
         dateTo6 = new Date( 2017, 10, 12, 16, 15 );
         Vehicle VehicleOM = new Vehicle( cityO, cityM, dateFrom5, dateTo6, 11, 200 );
+
+        ArrayList<Vehicle> Vehicles = new ArrayList<>();
 
         Vehicles.add( VehicleOL );
         Vehicles.add( VehicleOD );
@@ -2883,8 +2885,7 @@ public class VehiclesFromCode implements InputVehicle {
         Vehicles.add( VehicleCarpatiY );
         Vehicles.add( VehicleCarpatiZh );
         Vehicles.add( VehicleCarpatiS );
-
-*/
+        trains = Vehicles;*/
     }
 
 

@@ -31,7 +31,7 @@ public class AverageVehicleData implements GeneralVehicles{
     public ArrayList<Vehicle> getGeneralTrains() throws NoneVehicleToCity {
         ArrayList<Vehicle> trains = inputVehicle.getAllTrains();
         ArrayList<City> cities = inputUserData.getWantedCities();
-       return searchAllVehiclesByComfortLevel(AllData.TrainPlace,trains,cities);
+        return searchAllVehiclesByComfortLevel(AllData.TrainPlace,trains,cities);
 
     }
 
@@ -56,7 +56,6 @@ public class AverageVehicleData implements GeneralVehicles{
         return    searchAllVehiclesByComfortLevel(AllData.BusPlace,buses,cities);
 
     }
-
     //________________________________________________________________________________________________________________________
 
     /*
@@ -299,7 +298,8 @@ public class AverageVehicleData implements GeneralVehicles{
     //________________________________________________________________________________________________________________________
 
     /*
-
+            Это пока вообще не надо и нигде не используется. оставила на случай если решим искать не все возможные направления
+            а только чтобы хоть откудато можно было доехать в каждый город
      */
     private ArrayList<Vehicle> getVehicleWithOtherType(int comfortLevel, City cityFrom,City cityTo){
         ArrayList<Vehicle> resultVehicles = new ArrayList<>();
@@ -396,10 +396,10 @@ public class AverageVehicleData implements GeneralVehicles{
       Тут анализируем весь транспорт что есть и оцениваем сколько в среднем обойдется дорога  из каждой точки в каждую,
       и добавляем новые Vehicle, которые будут нужны только для алгоритма
       Пытаемся найти транспорт так, чтобы хотя бы как-то в любой город можно было доехать.
-      Если невозможно надо бы вернуть какой-то еррор!!
+
      */
     private ArrayList<Vehicle> getVehiclesWithAverageDataForAllCities(@NotNull ArrayList<Vehicle> allVehicles,
-                                                               @NotNull ArrayList<City> cities,int comfortLevel) throws NoneVehicleToCity {
+                                                                      @NotNull ArrayList<City> cities,int comfortLevel) throws NoneVehicleToCity {
         ArrayList<Vehicle> generalTrains=new ArrayList<>();
         for(int i=0;i<cities.size();i++) {
             for(int j=0;j<cities.size();j++) {

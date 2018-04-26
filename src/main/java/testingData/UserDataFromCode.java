@@ -20,7 +20,7 @@ public class UserDataFromCode implements InputUserData {
         wanted.add( cities.get( 0 ) );
         wanted.add( cities.get( 1 ) );
         wanted.add( cities.get( 2 ) );
-        wanted.add( cities.get( 3 ) );
+        /*wanted.add( cities.get( 3 ) );
         wanted.add( cities.get( 4 ) );
         wanted.add( cities.get( 5 ) );
 
@@ -46,12 +46,12 @@ public class UserDataFromCode implements InputUserData {
 
     @Override
     public double getMoney() {
-        return 900;
+        return 1900;
     }
 
     @Override
     public Time getTime() {
-        return new Time(60*60*60/3600);
+        return new Time(100,0,0);
     }
 
     @Override
