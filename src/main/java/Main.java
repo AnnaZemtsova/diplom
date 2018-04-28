@@ -34,7 +34,10 @@ public class Main {
         ArrayList<City> wantedCity = inputUserData.getWantedCities();
         TravelingSalesmanProblem travelingSalesmanProblem = new BranchBoundaryMethod();
 
-        GeneralVehicles vehicles1 = new AverageVehicleData(inputVehicle,inputUserData);
+        GeneralVehicles vehicles1 = new AverageVehicleData(inputVehicle.getAllTrains(),inputVehicle.getAllPlanes(),
+                inputVehicle.getAllBuses(),inputUserData.getWantedCities(),inputUserData.getPreferredTransport(),
+                inputUserData.getDateFrom(),inputUserData.getDateTo()
+                );
         ArrayList<Vehicle> generalTrains = null;
       //  try {
             generalTrains = vehicles1.getGeneralTrains();

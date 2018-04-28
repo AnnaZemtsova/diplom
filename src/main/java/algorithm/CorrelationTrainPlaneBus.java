@@ -101,6 +101,9 @@ public class CorrelationTrainPlaneBus implements CorrelationTransport {
 
     //__________________________________________________________________________________________________________________
 
+    /*
+        кол-во времени/денег насколько могут отличаться от допустимых
+     */
     private double getMoneyTimeDeviationsPercentage(double data){
         return data*MoneyTimeDeviationsPercentage/100;
     }
@@ -137,7 +140,9 @@ public class CorrelationTrainPlaneBus implements CorrelationTransport {
     }
 
     //__________________________________________________________________________________________________________________
-
+     /*
+        отклонение в процентах в том насколько цена/время отличаются от нужных
+     */
     private double getDegreeOfDeviation(double availableData,double wayData){
         if(wayData - availableData<=0) return 0;
         return (wayData - availableData)*100/availableData;
@@ -226,10 +231,10 @@ public class CorrelationTrainPlaneBus implements CorrelationTransport {
                 double timeDeviations = getDegreeOfDeviation(availableTime,wayTime);
                 if(priceDeviations>=timeDeviations)
                     findBestTwoTypeTransportCorrelation(fasterVehicles,cheaperVehicles,availableMoney,availableTime,
-                  fasterCoefficient-e,cheaperCoefficient+e,e/2);
+                  fasterCoefficient-e/2,cheaperCoefficient+e/2,e/2);
                 else
                     findBestTwoTypeTransportCorrelation(fasterVehicles,cheaperVehicles,availableMoney,availableTime,
-                            fasterCoefficient+e,cheaperCoefficient-e,e/2);
+                            fasterCoefficient+e/2,cheaperCoefficient-e/2,e/2);
             }
             return null;
     }
@@ -238,7 +243,8 @@ public class CorrelationTrainPlaneBus implements CorrelationTransport {
     private ArrayList<City> findBestThreeTypeTransportCorrelation(ArrayList<Vehicle> buses,
                                                                 ArrayList<Vehicle> trains,ArrayList<Vehicle> planes,
                                                                 double availableMoney,double availableTime,
-                                                                  double coefficientOfBuses, double coefficientOfTrains,
+                                                                  double coefficientOfBuses,
+                                                                  double coefficientOfTrains,
                                                                   double coefficientOfPlanes, double e){
         ArrayList<Vehicle> mergedVehicles = mergeThreeVehicles(buses,trains,planes,coefficientOfBuses,coefficientOfTrains,
                 coefficientOfPlanes);
@@ -256,12 +262,31 @@ public class CorrelationTrainPlaneBus implements CorrelationTransport {
         }else {
             double priceDeviations = getDegreeOfDeviation(availableMoney,wayPrice);
             double timeDeviations = getDegreeOfDeviation(availableTime,wayTime);
-            if(priceDeviations>=timeDeviations)
+            double ratioPrice=0;
+            double ratioTime=0;
+            if(priceDeviations>timeDeviations){
+                ratioPrice = priceDeviations/timeDeviations;
+            }
+            if(priceDeviations<timeDeviations){
+                ratioTime = timeDeviations/priceDeviations;
+            }
+            if(ratioPrice>=2){
                 findBestThreeTypeTransportCorrelation(buses,trains,planes,availableMoney,availableTime,
-                        fasterCoefficient-e,cheaperCoefficient+e,e/2);
-            else
-                findBestThreeTypeTransportCorrelation(buses,trains,planes,cheaperVehicles,availableMoney,availableTime,
-                        fasterCoefficient+e,cheaperCoefficient-e,e/2);
+                        coefficientOfBuses+(2*e)/3,coefficientOfTrains+e/3,coefficientOfPlanes-e,e/3);
+            }
+            if(ratioPrice>0&&ratioPrice<2){
+                findBestThreeTypeTransportCorrelation(buses,trains,planes,availableMoney,availableTime,
+                    coefficientOfBuses+e/4,coefficientOfTrains+e/4,coefficientOfPlanes-e/2,e/3);
+            }
+            if(ratioTime>=2){
+                findBestThreeTypeTransportCorrelation(buses,trains,planes,availableMoney,availableTime,
+                        coefficientOfBuses-e,coefficientOfTrains+e/3,coefficientOfPlanes+(2*e)/3,e/3);
+            }
+            if(ratioTime>0&&ratioTime<2){
+                findBestThreeTypeTransportCorrelation(buses,trains,planes,availableMoney,availableTime,
+                        coefficientOfBuses-e/2,coefficientOfTrains+e/4,coefficientOfPlanes-e/4,e/3);
+            }
+
         }
         return null;
     }

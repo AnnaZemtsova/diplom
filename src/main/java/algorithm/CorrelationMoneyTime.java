@@ -146,10 +146,11 @@ public class CorrelationMoneyTime implements CorrelationData {
         else{
             if(moneyPercentage>=timePercentage){
                 if(e<eps) return correlatedWays;
-                else findAllowableWay( correlatedWays,moneyPer+e,timePer-e,money,time,e/2 );
+                //раньше прибалвляла просто е!!! Вообще не знаю че так делала, надо е/2 , работало
+                else findAllowableWay( correlatedWays,moneyPer+e/2,timePer-e/2,money,time,e/2 );
             }else {
                 if(e<eps) return  correlatedWays;
-                else findAllowableWay(correlatedWays, moneyPer-e,timePer+e,money,time,e/2);
+                else findAllowableWay(correlatedWays, moneyPer-e/2,timePer+e/2,money,time,e/2);
             }
         }
         return null;
