@@ -19,7 +19,7 @@ import java.util.Date;
 public class CorrelationTrainPlaneBus implements CorrelationTransport {
     private CorrelationData correlationData;
     private GraphCreator graphCreator;
-    private final double eps = 0.000001;
+    private final double eps = 0.000000001;
     private ArrayList<Vehicle> trains;
     private ArrayList<Vehicle> planes;
     private ArrayList<Vehicle> buses;
@@ -240,6 +240,21 @@ public class CorrelationTrainPlaneBus implements CorrelationTransport {
     }
     //__________________________________________________________________________________________________________________
 
+
+    /*
+      Проводим слияние трех матриц и ищем лучший путь.
+      Все коэфициенты вначали должны быть равны 1/3
+      Дальше рекурсивно продолжаем искать путь и сливать матрицы по следующему принципу:
+      1. если отклонение по цене больше чем по времени:
+             если больше чем в два раза, выбрасываем половину самолетов, берем 2/6 автобусов и 1/6 поездов
+             если больше, но не слишком ( 1<отклонение<2) то убираем треть самолетов, а автобусов и поездов поровну
+      2. если по времени больше чем по цене:
+             если больше чем в два раза, выбрасываем половину автобусов, берем 2/6 самолетов и 1/6 поездов
+             если больше, но не слишком ( 1<отклонение<2) то убираем треть автобусов, а поездов и самолетов поровну
+        почему сравниваем именно в 2 раза больше или нет?
+          просто я так решила.
+          нужно потестить и мб поставить сюда другое значение.
+     */
     private ArrayList<City> findBestThreeTypeTransportCorrelation(ArrayList<Vehicle> buses,
                                                                 ArrayList<Vehicle> trains,ArrayList<Vehicle> planes,
                                                                 double availableMoney,double availableTime,
@@ -272,19 +287,19 @@ public class CorrelationTrainPlaneBus implements CorrelationTransport {
             }
             if(ratioPrice>=2){
                 findBestThreeTypeTransportCorrelation(buses,trains,planes,availableMoney,availableTime,
-                        coefficientOfBuses+(2*e)/3,coefficientOfTrains+e/3,coefficientOfPlanes-e,e/3);
+                        coefficientOfBuses+(2*e)/6,coefficientOfTrains+e/6,coefficientOfPlanes-e/2,e/3);
             }
             if(ratioPrice>0&&ratioPrice<2){
                 findBestThreeTypeTransportCorrelation(buses,trains,planes,availableMoney,availableTime,
-                    coefficientOfBuses+e/4,coefficientOfTrains+e/4,coefficientOfPlanes-e/2,e/3);
+                    coefficientOfBuses+e/6,coefficientOfTrains+e/6,coefficientOfPlanes-e/3,e/3);
             }
             if(ratioTime>=2){
                 findBestThreeTypeTransportCorrelation(buses,trains,planes,availableMoney,availableTime,
-                        coefficientOfBuses-e,coefficientOfTrains+e/3,coefficientOfPlanes+(2*e)/3,e/3);
+                        coefficientOfBuses-e/2,coefficientOfTrains+e/6,coefficientOfPlanes+(2*e)/6,e/3);
             }
             if(ratioTime>0&&ratioTime<2){
                 findBestThreeTypeTransportCorrelation(buses,trains,planes,availableMoney,availableTime,
-                        coefficientOfBuses-e/2,coefficientOfTrains+e/4,coefficientOfPlanes-e/4,e/3);
+                        coefficientOfBuses-e/3,coefficientOfTrains+e/6,coefficientOfPlanes+e/6,e/3);
             }
 
         }
