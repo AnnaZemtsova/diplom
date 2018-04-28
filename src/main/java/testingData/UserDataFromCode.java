@@ -11,8 +11,9 @@ import java.util.Date;
 public class UserDataFromCode implements InputUserData {
     ArrayList<City> cities;
 
-    public UserDataFromCode(){
-        cities = AllData.cities;
+    public UserDataFromCode(ArrayList <City> cities){
+
+        this.cities =cities;
     }
     @Override
     public ArrayList<City> getWantedCities() {
@@ -70,12 +71,12 @@ public class UserDataFromCode implements InputUserData {
     }
 
     @Override
-    public int displacementDatesType() {
+    public int getDisplacementDatesType() {
         return SAME_NUMBER_OF_DAYS;
     }
 
     @Override
-    public ArrayList<Date> displacementDates() {
+    public ArrayList<Date> getDisplacementDates() {
         ArrayList <Date> displacementDates = new ArrayList<>();
         return displacementDates;
     }

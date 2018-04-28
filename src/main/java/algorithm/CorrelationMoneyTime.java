@@ -6,12 +6,36 @@ import dataForAlgorithm.CorrelatedWay;
 
 import java.util.ArrayList;
 
-public class CorrelationMoneyTime implements Algorithm {
+public class CorrelationMoneyTime implements CorrelationData {
     private TravelingSalesmanProblem travelingSalesmanProblem;
     private GraphCreator graphCreator;
     private ArrayList<City> wantedCities;
     private final double eps = 0.000001;
+    private double wayPrice = 0;
+    private double wayTime = 0;
 
+    @Override
+    public double getWayPrice() {
+        return wayPrice;
+    }
+
+    public void setWayPrice(double wayPrice) {
+        this.wayPrice = wayPrice;
+    }
+
+    @Override
+    public double getWayTime() {
+        return wayTime;
+    }
+
+    @Override
+    public void setGraphCreator(GraphCreator graphCreator) {
+        this.graphCreator = graphCreator;
+    }
+
+    public void setWayTime(double wayTime) {
+        this.wayTime = wayTime;
+    }
     //_____________________________________________________________________________________
 
     public CorrelationMoneyTime(TravelingSalesmanProblem travelingSalesmanProblem, GraphCreator graphCreator,
@@ -26,16 +50,16 @@ public class CorrelationMoneyTime implements Algorithm {
     @Override
     public ArrayList<City> getWay( double money, double time) {
         ArrayList<Cell> bestWay = findBestWay( money,time );
-        double moneyCurrVal = findOtherValue(graphCreator.createGraphByMoney( wantedCities ),bestWay );
-        double timeCurrVal = findOtherValue( graphCreator.createGraphByTime(wantedCities ),bestWay );
+        wayPrice = findOtherValue(graphCreator.createGraphByMoney( wantedCities ),bestWay );
+        wayTime = findOtherValue( graphCreator.createGraphByTime(wantedCities ),bestWay );
         ArrayList<City> result = getCities(bestWay);
-       // printCities( result );
-        System.out.println("Цена поездки: "+moneyCurrVal+" ,время: "+timeCurrVal);
         return result;
     }
 
 
     //_____________________________________________________________________________________
+
+
 
     private ArrayList<City> getCities(ArrayList<Cell> way){
         ArrayList<City> result = new ArrayList<>(  );

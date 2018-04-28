@@ -11,6 +11,10 @@ public class Vehicle {
     private double price;
     private double timeInWay;
 
+    public Vehicle() {
+
+    }
+
     public double getTimeInWay() {
         return timeInWay;
     }

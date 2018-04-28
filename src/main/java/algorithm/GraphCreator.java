@@ -9,4 +9,6 @@ public interface GraphCreator {
      double [][] createGraphByTime(ArrayList<City> wantedCities);
      double[][] createGraphByTimeMoney(ArrayList<City> wantedCities,double m,double t);
      void printGraph(double[][] graph);
+     ArrayList<Vehicle> getVehicles();
+     void setVehicles(ArrayList<Vehicle> vehicles);
 }

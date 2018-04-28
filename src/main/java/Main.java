@@ -28,33 +28,34 @@ public class Main {
         AllData.cities = cities;
         AllData.trains = vehicles;
 
-        InputUserData inputUserData = new UserDataFromCode();
+        InputUserData inputUserData = new UserDataFromCode(cities);
         double money = inputUserData.getMoney();
         double time = (double)(inputUserData.getTime()).getTime();
         ArrayList<City> wantedCity = inputUserData.getWantedCities();
         TravelingSalesmanProblem travelingSalesmanProblem = new BranchBoundaryMethod();
 
-        //GeneralVehicles vehicles1 = new AverageVehicleData(inputVehicle,inputCities,inputUserData);
+        GeneralVehicles vehicles1 = new AverageVehicleData(inputVehicle,inputUserData);
         ArrayList<Vehicle> generalTrains = null;
-        /*try {
+      //  try {
             generalTrains = vehicles1.getGeneralTrains();
-        } catch (NoneVehicleToCity noneVehicleToCity) {
-            noneVehicleToCity.printStackTrace();
-        }*/
-        AllData.generalTrains = AllData.trains;
+        //} catch (NoneVehicleToCity noneVehicleToCity) {
+          //  noneVehicleToCity.printStackTrace();
+       // }
+        AllData.generalTrains = generalTrains;
 
         GraphCreator graphCreator = new Graph(AllData.generalTrains);
-        Algorithm algorithm = new CorrelationMoneyTime(travelingSalesmanProblem,graphCreator,wantedCity );
+        CorrelationData algorithm = new CorrelationMoneyTime(travelingSalesmanProblem,graphCreator,wantedCity );
          graphCreator = new Graph(AllData.generalTrains);
-         graphCreator.printGraph(graphCreator.createGraphByMoney(inputUserData.getWantedCities()));
-       /* for(int i=0;i<generalTrains.size();i++){
+        // graphCreator.printGraph(graphCreator.createGraphByMoney(inputUserData.getWantedCities()));
+        for(int i=0;i<generalTrains.size();i++){
             System.out.println(generalTrains.get(i).getFrom().getName()+" "+
-                    generalTrains.get(i).getTo().getName()+" "+generalTrains.get(i).getPrice()+" "+generalTrains.get(i).getTimeInWay());
-        }*/
+                    generalTrains.get(i).getTo().getName()+" "+generalTrains.get(i).getPrice()+" "+generalTrains.get(i).getTimeInWay()+
+            " "+generalTrains.get(i).getComfortLevel());
+        }
          ArrayList<City> cities1 = algorithm.getWay(money, time);
         System.out.println(cities1.size());
         for (int i=0;i<cities1.size();i++) {
-            System.out.println( cities1.get(i).getName() );
+          //  System.out.println( cities1.get(i).getName() );
         }
 
     }

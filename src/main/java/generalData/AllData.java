@@ -7,7 +7,16 @@ import data.Vehicle;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class AllData{public static ArrayList<City> cities;
+public class AllData{
+    /*
+    все эти allCities allTrains тут лучше не хранить, а передавать непосредственно в методах.
+    Пока пусть будут тут
+    но в дальшейшем удалить (кроме как из каких-то мэйнов они нигде не вызываются)
+    оставив только константы типов транспорта
+    и переименовав в класс AllTransportTypes (ну или что-то такое)
+     */
+    //------------------------------------------------
+    public static ArrayList<City> cities;
 
     public static ArrayList<Vehicle> trains;
 
@@ -20,6 +29,7 @@ public class AllData{public static ArrayList<City> cities;
     public static ArrayList<Vehicle> buses;
 
     public static ArrayList<Vehicle> generalBuses;
+    //------------------------------------------------
 
     public static  int SittingPlace = 10;
 
@@ -40,8 +50,5 @@ public class AllData{public static ArrayList<City> cities;
     public static int Train  =1;
 
     public static int Bus  =2;
-
-
-
 
 }

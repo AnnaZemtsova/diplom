@@ -97,5 +97,15 @@ public class Graph implements GraphCreator {
             System.out.println("------------------------------------------------------------------");
         }
     }
+
+    @Override
+    public ArrayList<Vehicle> getVehicles() {
+        return vehicles;
+    }
+
+    @Override
+    public void setVehicles(ArrayList<Vehicle> vehicles) {
+        this.vehicles = vehicles;
+    }
 //_____________________________________________________________________________________
 }

@@ -16,6 +16,6 @@ public interface InputUserData {
      Date getDateFrom();
      Date getDateTo();
      int getPreferredTransport();
-     int displacementDatesType();
-     ArrayList<Date> displacementDates();
+     int getDisplacementDatesType();
+     ArrayList<Date> getDisplacementDates();
 }
