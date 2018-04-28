@@ -32,8 +32,8 @@
       <file leaf-file-name="CorrelationTrainPlaneBus.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/algorithm/CorrelationTrainPlaneBus.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="395">
-              <caret line="187" column="105" lean-forward="false" selection-start-line="187" selection-start-column="105" selection-end-line="187" selection-end-column="105" />
+            <state relative-caret-position="-3708">
+              <caret line="26" column="35" lean-forward="true" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3666#3667#0" expanded="true" />
@@ -1026,12 +1026,12 @@
       <workItem from="1524677798717" duration="16457000" />
       <workItem from="1524754001557" duration="10835000" />
       <workItem from="1524843835720" duration="19961000" />
-      <workItem from="1524939494488" duration="8102000" />
+      <workItem from="1524939494488" duration="8483000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="63956000" />
+    <option name="totallyTimeSpent" value="64337000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1409" height="810" extended-state="0" />
@@ -1340,8 +1340,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/algorithm/CorrelationTrainPlaneBus.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="187" column="105" lean-forward="false" selection-start-line="187" selection-start-column="105" selection-end-line="187" selection-end-column="105" />
+        <state relative-caret-position="-3708">
+          <caret line="26" column="35" lean-forward="true" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#3666#3667#0" expanded="true" />
