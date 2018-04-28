@@ -32,12 +32,12 @@
       <file leaf-file-name="CorrelationTrainPlaneBus.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/algorithm/CorrelationTrainPlaneBus.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="252" column="74" lean-forward="false" selection-start-line="252" selection-start-column="74" selection-end-line="252" selection-end-column="74" />
+            <state relative-caret-position="395">
+              <caret line="187" column="105" lean-forward="false" selection-start-line="187" selection-start-column="105" selection-end-line="187" selection-end-column="105" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4263#4264#0" expanded="true" />
-                <element signature="e#4324#4325#0" expanded="true" />
+                <element signature="e#3666#3667#0" expanded="true" />
+                <element signature="e#3727#3728#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -106,7 +106,7 @@
       <file leaf-file-name="CorrelationMoneyTime.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/algorithm/CorrelationMoneyTime.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="246">
+            <state relative-caret-position="1729">
               <caret line="154" column="9" lean-forward="true" selection-start-line="154" selection-start-column="9" selection-end-line="154" selection-end-column="9" />
               <folding>
                 <element signature="e#770#771#0" expanded="true" />
@@ -156,6 +156,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>System</find>
+      <find>traveling</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -1025,12 +1026,12 @@
       <workItem from="1524677798717" duration="16457000" />
       <workItem from="1524754001557" duration="10835000" />
       <workItem from="1524843835720" duration="19961000" />
-      <workItem from="1524939494488" duration="6587000" />
+      <workItem from="1524939494488" duration="8102000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62441000" />
+    <option name="totallyTimeSpent" value="63956000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1409" height="810" extended-state="0" />
@@ -1294,14 +1295,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/algorithm/CorrelationData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="10" column="37" lean-forward="false" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="245">
@@ -1326,9 +1319,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/algorithm/CorrelationData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="10" column="37" lean-forward="false" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/algorithm/CorrelationMoneyTime.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
+        <state relative-caret-position="1729">
           <caret line="154" column="9" lean-forward="true" selection-start-line="154" selection-start-column="9" selection-end-line="154" selection-end-column="9" />
           <folding>
             <element signature="e#770#771#0" expanded="true" />
@@ -1339,12 +1340,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/algorithm/CorrelationTrainPlaneBus.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="252" column="74" lean-forward="false" selection-start-line="252" selection-start-column="74" selection-end-line="252" selection-end-column="74" />
+        <state relative-caret-position="395">
+          <caret line="187" column="105" lean-forward="false" selection-start-line="187" selection-start-column="105" selection-end-line="187" selection-end-column="105" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4263#4264#0" expanded="true" />
-            <element signature="e#4324#4325#0" expanded="true" />
+            <element signature="e#3666#3667#0" expanded="true" />
+            <element signature="e#3727#3728#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -60,19 +60,6 @@ public class CorrelationTrainPlaneBus implements CorrelationTransport {
     private static int Money = 2;
     private static int Time = 3;
 
-    /*
-      в этих массивах хранятся булевы значения используется ли
-       транспортное средство с таким индексом
-      для поиска лучшего пути
-      сначала в графе все preferredVehiclesUsed, но если такой путь нас
-      не удовлетворяет то ищем неприоритетный транспорт и в каком-то
-      проценте добавляем его в наш граф, а приоритетный убираем
-      но нужно где-то хранить какие транспортные средства были использованы, а какие нет.
-      иначе можем взять какую-то машину несколько раз
-     */
-    private boolean[] nonPreferredVehiclesUsed;
-    private boolean[] preferredVehiclesUsed;
-
 
     //__________________________________________________________________________________________________________________
 
@@ -121,11 +108,16 @@ public class CorrelationTrainPlaneBus implements CorrelationTransport {
 
     //__________________________________________________________________________________________________________________
     /*
-
+        заполняем граф предпочитаемым транспортом и ищем путь.
+        если путь есть и результат не сильно отклоняется от заданных цени и времени возвращаем его
+        если сильно отклоняется от чего либо ищем другой путь коррелируя виды транспорта
      */
     @Override
     public ArrayList<City> getWay() {
-      ArrayList<City> bestWay = correlationData.getWay(availableMoney,availableTime);
+        if(preferredTransport==AllData.Plane) graphCreator.setVehicles(planes);
+        if(preferredTransport==AllData.Train)  graphCreator.setVehicles(trains);
+        if(preferredTransport==AllData.Bus)  graphCreator.setVehicles(buses);
+        ArrayList<City> bestWay = correlationData.getWay(availableMoney,availableTime);
         double wayPrice = correlationData.getWayPrice();
         double wayTime = correlationData.getWayTime();
 
@@ -134,9 +126,9 @@ public class CorrelationTrainPlaneBus implements CorrelationTransport {
         if((wayPrice+priceDeviations<=availableMoney)&&(wayTime+timeDeviations<=availableTime)){
             return bestWay;
         }else{
-
+            bestWay = correlationTrainPlaneBus(bestWay,preferredTransport,wayPrice,wayTime,availableMoney,availableTime);
         }
-        return null;
+        return bestWay;
     }
 
     //__________________________________________________________________________________________________________________
@@ -149,7 +141,10 @@ public class CorrelationTrainPlaneBus implements CorrelationTransport {
     }
     //__________________________________________________________________________________________________________________
 
-    private ArrayList<City> firstCorrelateTrainPlaneBus(int preferredTransport,
+    /*
+     ищем лучший путь из всех видов транспорта
+     */
+    private ArrayList<City> correlationTrainPlaneBus(ArrayList<City> way, int preferredTransport,
                                                         double wayPrice,double wayTime,
                                                         double availableMoney,double availableTime){
         double priceDeviations = getDegreeOfDeviation(availableMoney,wayPrice);
@@ -161,23 +156,38 @@ public class CorrelationTrainPlaneBus implements CorrelationTransport {
         искать другой путь просто нет смысла
         любой будет медленнее
          */
-        if(priceDeviations==0&&timeDeviations>0&&preferredTransport==AllData.Plane) return null;
+        if(priceDeviations==0&&timeDeviations>0&&preferredTransport==AllData.Plane) return way;
 
         ArrayList<Vehicle> preferredVehicles = graphCreator.getVehicles();
-        ArrayList<Vehicle> nonPreferredVehicles;
+        ArrayList<Vehicle> cheaperVehicles;
+        ArrayList<Vehicle> fasterVehicles;
         /*
         если отклонение по цене больше чем по времени ищем более дешевый транспорт
         иначе - более быстрый
          */
         if(priceDeviations>=timeDeviations){
-            nonPreferredVehicles = sortByData(getNotPreferredVehicles(preferredTransport,MoneyDeviation),Money);
-
+            fasterVehicles = preferredVehicles;
+            cheaperVehicles = sortByData(getNotPreferredVehicles(preferredTransport,MoneyDeviation),Money);
         }else{
-            nonPreferredVehicles = sortByData(getNotPreferredVehicles(preferredTransport,TimeDeviation),Time);
-
+            fasterVehicles = sortByData(getNotPreferredVehicles(preferredTransport,TimeDeviation),Time);
+            cheaperVehicles = preferredVehicles;
         }
-
-        return null;
+        way = findBestTwoTypeTransportCorrelation(fasterVehicles,cheaperVehicles,availableMoney,availableTime,
+                0.5,0.5,eps);
+        wayPrice = correlationData.getWayPrice();
+        wayTime = correlationData.getWayTime();
+        priceDeviations = getDegreeOfDeviation(availableMoney,wayPrice);
+        timeDeviations = getDegreeOfDeviation(availableTime,wayTime);
+        if((wayPrice+priceDeviations>availableMoney)&&(wayTime+timeDeviations>availableTime)){
+            way = findBestThreeTypeTransportCorrelation(buses,trains,planes,availableMoney,availableTime,
+                    1/3,1/3,1/3,eps);
+        }
+        /*
+         тут я возвращаю последний найденный путь. теоретически как бы, если лучшим все же был путь из
+         одного вида транспорта оно должно до этого дойти. но кто знает. надо потестить хорошо
+         и если что не безусловно возвращать найденный путь а выбрать лучший из полученных и вернуть его
+         */
+        return way;
     }
     //__________________________________________________________________________________________________________________
 
@@ -287,19 +297,23 @@ public class CorrelationTrainPlaneBus implements CorrelationTransport {
             }
             if(ratioPrice>=2){
                 findBestThreeTypeTransportCorrelation(buses,trains,planes,availableMoney,availableTime,
-                        coefficientOfBuses+(2*e)/6,coefficientOfTrains+e/6,coefficientOfPlanes-e/2,e/3);
+                        coefficientOfBuses+(2*e)/6,coefficientOfTrains+e/6,
+                        coefficientOfPlanes-e/2,e/3);
             }
             if(ratioPrice>0&&ratioPrice<2){
                 findBestThreeTypeTransportCorrelation(buses,trains,planes,availableMoney,availableTime,
-                    coefficientOfBuses+e/6,coefficientOfTrains+e/6,coefficientOfPlanes-e/3,e/3);
+                    coefficientOfBuses+e/6,coefficientOfTrains+e/6,
+                        coefficientOfPlanes-e/3,e/3);
             }
             if(ratioTime>=2){
                 findBestThreeTypeTransportCorrelation(buses,trains,planes,availableMoney,availableTime,
-                        coefficientOfBuses-e/2,coefficientOfTrains+e/6,coefficientOfPlanes+(2*e)/6,e/3);
+                        coefficientOfBuses-e/2,coefficientOfTrains+e/6,
+                        coefficientOfPlanes+(2*e)/6,e/3);
             }
             if(ratioTime>0&&ratioTime<2){
                 findBestThreeTypeTransportCorrelation(buses,trains,planes,availableMoney,availableTime,
-                        coefficientOfBuses-e/3,coefficientOfTrains+e/6,coefficientOfPlanes+e/6,e/3);
+                        coefficientOfBuses-e/3,coefficientOfTrains+e/6,
+                        coefficientOfPlanes+e/6,e/3);
             }
 
         }
