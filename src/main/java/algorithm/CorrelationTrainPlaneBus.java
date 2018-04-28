@@ -465,8 +465,8 @@ public class CorrelationTrainPlaneBus implements CorrelationTransport {
         мы должны получить результирующий массив в котором были бы все переезды (из всех городов во все)
         часть мы уже заполнини неприоритетным самым выгодным транспортом. остальные переезды нужно взять
         из приоритетного.
-        Мы смотрим, есть ли такой переезд на неприоритетном транспорте, если нет
-        берем приоритетный
+        Мы смотрим, есть ли такой переезд в resultVehicles , если нет
+        берем из otherVehicles
      */
     private ArrayList<Vehicle> getDisplacementNotContainInResultVehicles(ArrayList<Vehicle> resultVehicles,
                                                                          ArrayList<Vehicle> otherVehicles,
