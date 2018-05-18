@@ -9,8 +9,8 @@ import inputData.InputVehicle;
 import testingData.CitiesFromCode;
 import testingData.UserDataFromCode;
 import testingData.VehiclesFromCode;
-import transport.AverageVehicleData;
-import transport.GeneralVehicles;
+import algorithm.transport.AverageVehicleData;
+import algorithm.transport.GeneralVehicles;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -303,7 +303,7 @@ public class CorrelationTrainPlaneBus implements CorrelationTransport {
             if(ratioPrice>0&&ratioPrice<2){
                 findBestThreeTypeTransportCorrelation(buses,trains,planes,availableMoney,availableTime,
                     coefficientOfBuses+e/6,coefficientOfTrains+e/6,
-                        coefficientOfPlanes-e/3,e/3);
+                                coefficientOfPlanes-e/3,e/3);
             }
             if(ratioTime>=2){
                 findBestThreeTypeTransportCorrelation(buses,trains,planes,availableMoney,availableTime,
@@ -465,8 +465,8 @@ public class CorrelationTrainPlaneBus implements CorrelationTransport {
         мы должны получить результирующий массив в котором были бы все переезды (из всех городов во все)
         часть мы уже заполнини неприоритетным самым выгодным транспортом. остальные переезды нужно взять
         из приоритетного.
-        Мы смотрим, есть ли такой переезд на неприоритетном транспорте, если нет
-        берем приоритетный
+        Мы смотрим, есть ли такой переезд в resultVehicles , если нет
+        берем из otherVehicles
      */
     private ArrayList<Vehicle> getDisplacementNotContainInResultVehicles(ArrayList<Vehicle> resultVehicles,
                                                                          ArrayList<Vehicle> otherVehicles,
@@ -528,7 +528,7 @@ public class CorrelationTrainPlaneBus implements CorrelationTransport {
         ArrayList<City> cities = inputCities.getCities();
 
         InputVehicle inputVehicle = new VehiclesFromCode();
-        ArrayList<Vehicle> vehicles = inputVehicle.getAllTrains();
+        ArrayList<Vehicle> vehicles = inputVehicle.getAllTrains(new Date(),new Date(),new ArrayList<>());
 
         AllData.cities = cities;
         AllData.trains = vehicles;

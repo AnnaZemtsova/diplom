@@ -1,0 +1,62 @@
+.main-form{
+    margin-left: 10%;
+    margin-top: 2%;
+    margin-right: 10%;
+    margin-bottom: 2%;
+    width: 100%;
+    opacity: 1;
+}
+body {
+    background: url("images/maxresdefault.jpg");
+}
+.data{
+    margin-left: 10%;
+    margin-top: 2%;
+    margin-right: 10%;
+    margin-bottom: 2%;
+    width: 80%;
+    height:100%;
+    opacity: 0.9;
+    background: white;
+    z-index: 0;
+}
+.button{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+.dataFrom{
+    display: inline;
+}
+.dataTo{
+    margin-left: 9%;
+    display: inline;
+}
+.currency{
+    display: inline;
+    width: 25%;
+    height: 30px;
+    border:1px solid #ccc;
+}
+.text{
+    margin-top: 2%;
+    width: 60%;
+    height: 30px;
+    border:1px solid #ccc;
+}
+
+#map{
+    margin-top: 1%;
+    width: 60%;
+    height: 360px;
+    margin-bottom: 3%;
+    float: left;
+}
+#chosenCities{
+    width:20%;
+    margin-top: 1%;
+    margin-right: 3%;
+    margin-left: 5%;
+    height:325px;
+    margin-bottom: 1%;
+}
+.angular-google-map-container { height: 400px; }

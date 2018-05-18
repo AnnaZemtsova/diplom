@@ -21,19 +21,19 @@ public class VehiclesFromCode implements InputVehicle {
     }
 
     @Override
-    public ArrayList<Vehicle> getAllTrains() {
+    public ArrayList<Vehicle> getAllTrains(Date from,Date to,ArrayList<City> cities) {
         fullTrains();
         return trains;
     }
 
     @Override
-    public ArrayList<Vehicle> getAllPlanes() {
+    public ArrayList<Vehicle> getAllPlanes(Date from,Date to,ArrayList<City> cities) {
         fullPlanes();
         return planes;
     }
 
     @Override
-    public ArrayList<Vehicle> getAllBuses() {
+    public ArrayList<Vehicle> getAllBuses(Date from,Date to,ArrayList<City> cities) {
         fullBuses();
         return buses;
     }

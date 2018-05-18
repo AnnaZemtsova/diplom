@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html ng-app="userData" ng-controller="controller">
+<head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+
+    <meta charset="UTF-8">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script type="text/javascript" src="lib/jquery/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="lib/angularjs/angular.min.js"></script>
+    <script type="text/javascript" src="lib/angularjs/angular-resource.min.js"></script>
+    <script type="text/javascript" src="lib/angular-ui/angular-ui.min.js"></script>
+
+    <script type="text/javascript" src="lib/selects/js/select2.min.js"></script>
+
+
+    <script type="text/javascript" src="lib/js/select2-init.js"></script>
+
+    <script type="text/javascript" src="lib/js/navigation.js"></script>
+    <script type="text/javascript" src="lib/js/inputs-actions.js"></script>
+
+    <script type="text/javascript" src="userData.js"></script>
+    <script type="text/javascript" src="userData.services.js"></script>
+    <script type="text/javascript" src="userData.controller.js"></script>
+
+    <link rel="stylesheet" href="lib/angular-ui/angular-ui.min.css">
+    <link rel="stylesheet" href="lib/bootstrap-3.3.2-dist/css/bootstrap.min.css">
+
+   <link rel="stylesheet" href="lib/bootstrap-3.3.2-dist/css/bootstrap-theme.min.css">
+
+    <link href="lib/calendar-js/calendar.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="lib/calendar-js/calendar.js"></script>
+
+    <script src="lib/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="userData.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-z7Ub9nw63bt4hoAFxOKFk6on5mY_EHU&callback=initMap&language=ru&region=eu"
+            async defer></script>
+    <script src="maps.js"></script>
+
+</head>
+<body>
+<div class="data">
+        <form role="form">
+            <div  class ="main-form">
+                <label style="margin-top: 2%">Выберите города, которые хотите посетить</label>
+                <br>
+                <div id="map">
+                    </div>
+
+                <div>
+                      <textarea ng-model=chosenCities id="chosenCities" ></textarea>
+                    <input class="btn btn-success" style="margin-left: 5% ;width: 20%;"  onclick="deleteMarkers();" type=button value="Очистить список">
+
+                    <br> <br>
+                    <div ng-repeat="cityData in cityDatas">
+                       <city-component city-data="cityData" on-delete="deleteCity" ></city-component>
+
+                    </div>
+                </div>
+                <div class="dataFrom">
+                    <label >Дата выезда </label>
+                    <input type="text" name="date" ng-model=dateFrom id="dateFrom" readonly="readonly" placeholder="Введите дату" onclick="showcalendar(this)"/>
+                </div>
+                <div class="dataTo">
+                    <label >Дата возвращения </label>
+                    <input type="text" name="date" ng-model=dateTo id="dateTo" readonly="readonly" placeholder="Введите дату" onclick="showcalendar(this)"/>
+                </div>
+                <br> <br>
+            <div class="form-group">
+               <label >Сумма, на которую Вы расчитываете</label>
+                <br>
+                <input type="text" class="text"  id="money" ng-model=money placeholder="Введите сумму">
+                <select  class="currency" id="currency" ng-model=currency >
+                    <option selected>USD</option>
+                    <option>UAN</option>
+                    <option>RUB</option>
+                    <option>EUR</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label >Сколько часов Вы готовы провести в транспорте</label>
+                <br>
+                <input class="text" type="time" id="time" ng-model=time placeholder="Введите время">
+            </div>
+            </div>
+           <div class="button"><input type="button" value="Найти путь" ng-click="findWay()" class="btn btn-success"  style="width: 107%; margin-bottom: 2%"></div>
+
+        </form>
+
+</div>
+
+</body>
