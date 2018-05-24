@@ -4,11 +4,11 @@ import data.City;
 import java.util.Date;
 
 public class Train {
-    City from;
-    City to;
-    Date datefrom;
-    Date dateTo;
-    double destination;
+   private City from;
+   private City to;
+   private Date datefrom;
+   private Date dateTo;
+   private double destination;
     double price;
 
     public double getDestination() {
